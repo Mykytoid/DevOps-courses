@@ -37,7 +37,7 @@ def password_generation(leng):
 
     #pasw.insert(randint(0, leng-1), choice(special_character))
     #pasw.append(choice(special_character))
-    print(pasw)
+    
     #print(choice(special_character))
 
 def reinit():
