@@ -39,6 +39,7 @@ setup_virtual_environment() {
     sudo pip3 install virtualenv
     mkdir envs
     virtualenv -p python3 ./envs/
+
 }
 
 #install_django() {
