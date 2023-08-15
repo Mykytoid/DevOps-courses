@@ -3,9 +3,9 @@
 # Install Python
 install_python() {
     echo "Installing Python..."
-    if ! python3.10 --version &>/dev/null; then
+    if ! python3.7.17 --version &>/dev/null; then
         sudo apt-get update
-        sudo apt-get install -y python3.10
+        sudo apt-get install -y python3.7.17
         sudo apt-get install python3-pip
     else
         echo "Python 3.9 is already installed."
@@ -38,7 +38,7 @@ setup_virtual_environment() {
     echo "Setting up virtual environment..."
     sudo pip3 install virtualenv
     mkdir envs
-    virtualenv -p python3.10 ./envs/
+    virtualenv -p python3.7.17 ./envs/
 
 }
 
@@ -115,12 +115,12 @@ run_server() {
 #    pip3.9 install django
     echo "Make migrations"
     # Make migrations
-    python3.10 manage.py makemigrations
-    python3.10 manage.py migrate
+    python3.7 manage.py makemigrations
+    python3.7 manage.py migrate
 
     echo "For search feature we need to index certain tables to the haystack. For that run below command."
     # For search feature we need to index certain tables to the haystack. For that run below command.
-    python3.10 manage.py rebuild_index
+    python3.7 manage.py rebuild_index
 
     # Check if Django is installed in the virtual environment
 #    if ! python3 -c "import django" &>/dev/null; then
@@ -129,7 +129,7 @@ run_server() {
 #    fi
     echo "Run the server"
     # Run the server
-    python3.10 manage.py runserver 0:8001
+    python3.7 manage.py runserver 0:8001
 
     # your server is up on port 8001
 }
