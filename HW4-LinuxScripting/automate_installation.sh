@@ -3,13 +3,22 @@
 # Install Python
 install_python() {
     echo "Installing Python..."
-    if ! python3.7.17 --version &>/dev/null; then
-        sudo apt-get update
-        sudo apt-get install -y python3.7.17
-        sudo apt-get install python3-pip
-    else
-        echo "Python 3.9 is already installed."
-    fi
+#    if ! python3.7.17 --version &>/dev/null; then
+#        sudo add-apt-repository ppa:deadsnakes/ppa
+#        sudo apt-get update
+#        sudo apt-get install python3.7 python3.7-dev python3.7-venv
+#        sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.7 1
+#        sudo ln -sfn /usr/bin/python3.7 /usr/bin/python
+#
+#        sudo apt-get install python3-pip
+#    else
+#        echo "Python 3.9 is already installed."
+#    fi
+    sudo add-apt-repository ppa:deadsnakes/ppa
+    sudo apt-get update
+    sudo apt-get install python3.7 python3.7-dev python3.7-venv
+    sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.7 1
+    sudo ln -sfn /usr/bin/python3.7 /usr/bin/python
 }
 
 install_mysql() {
@@ -17,6 +26,14 @@ install_mysql() {
     if ! mysql --version &>/dev/null; then
         sudo apt-get update
         sudo apt-get install -y mysql-server libmysqlclient-dev
+        # Start MySQL service
+        sudo systemctl start mysql.service
+
+        # Set root user password and authentication method
+        sudo mysql -e "ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password';"
+
+        # Exit MySQL
+        sudo mysql -e "exit"
     else
         echo "MySQL is already installed."
     fi
